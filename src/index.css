@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0f1d3a;
+  --navy-2: #16264d;
+  --navy-3: #1e3a6b;
+  --soft-blue: #6aa6ff;
+  --gold: #ffd24c;
+  --gold-2: #ffb703;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: var(--navy);
+  color: #fff;
+  overscroll-behavior: none;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+}
+
+/* ---- Animations ---- */
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+@keyframes floatUpSm {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+@keyframes checkPop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.9; }
+}
+@keyframes sparkBurst {
+  0% { transform: scale(0) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1) translate(var(--dx), var(--dy)); opacity: 0; }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(255,210,76,0.4), 0 0 60px rgba(106,166,255,0.25); }
+  50% { box-shadow: 0 0 40px rgba(255,210,76,0.7), 0 0 90px rgba(106,166,255,0.45); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes risefrombottom {
+  from { opacity: 0; transform: translateY(60px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes driftStar {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) translateX(var(--drift, 20px)); opacity: 0; }
+}
+
+.anim-float { animation: floatUp 4s ease-in-out infinite; }
+.anim-float-sm { animation: floatUpSm 3.5s ease-in-out infinite; }
+.anim-twinkle { animation: twinkle 2.5s ease-in-out infinite; }
+.anim-fade-up { animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-fade { animation: fadeIn 0.6s ease both; }
+.anim-pop { animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.anim-shake { animation: shake 0.4s ease; }
+.anim-check { animation: checkPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.anim-glow { animation: glowPulse 2.5s ease-in-out infinite; }
+.anim-rise { animation: risefrombottom 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.press { transition: transform 0.12s ease; }
+.press:active { transform: scale(0.94); }
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #ffd24c 0%, #fff4d6 25%, #ffd24c 50%, #fff4d6 75%, #ffd24c 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-3d.flipped { transform: rotateY(180deg); }
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-back { transform: rotateY(180deg); }
+
+/* hide scrollbars on the game shell */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-float, .anim-float-sm, .anim-twinkle, .anim-glow, .shimmer-text { animation: none; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.3s !important; }
+}
